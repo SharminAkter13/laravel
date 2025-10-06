@@ -16,7 +16,7 @@ Route::get('/add-user', function () {
 
 
 Route::get('/man-user', function () {
-    return view('pages.user');
+    return view('pages.manage_user');
 });
 
 Route::get('/', function () {

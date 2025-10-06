@@ -1,7 +1,7 @@
-<!-- View stored in resources/views/greeting.blade.php -->
+@extends('master')
+@section('content')
 
-<html>
-    <body>
+    <div>
         <h1>Hello, {{ $name }}</h1>
-    </body>
-</html>
+</div>
+@endsection

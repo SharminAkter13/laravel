@@ -1,7 +1,7 @@
 @extends('master')
 @section('content')
 
-
+<div class="card p-5 m-5">
 <table class="table">
   <thead>
     <tr>
@@ -32,4 +32,5 @@
     </tr>
   </tbody>
 </table>
+</div>
 @endsection
