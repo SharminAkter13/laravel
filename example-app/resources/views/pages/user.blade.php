@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Users</title>
-</head>
-<body>
+@extends('master')
+@section('content')
+
+<div>
     <h1 style="margin: auto; text-align:center;background-color:aqua">This is an Users Page</h1>
     <h2 style="margin: auto; text-align:center;background-color:red; color:aliceblue">(˶ᵔ ᵕ ᵔ˶) Happy Browsing  (˶ᵔ ᵕ ᵔ˶)</h3>
-    <div>
-        <table>
+    <table>
             <tr>
                 <th>#</th>
                 <th>Name</th>
@@ -37,5 +32,4 @@
             </tr>
         </table>
     </div>
-</body>
-</html>
+@endsection
