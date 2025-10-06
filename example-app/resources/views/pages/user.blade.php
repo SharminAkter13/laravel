@@ -1,7 +1,7 @@
 @extends('master')
 @section('content')
 
-<div class="card-header">
+<div class="card-header m-5 p-5">
     <h1 style="margin: auto; text-align:center;background-color:aqua">This is an Users Page</h1>
     <h2 style="margin: auto; text-align:center;background-color:red; color:aliceblue">(˶ᵔ ᵕ ᵔ˶) Happy Browsing  (˶ᵔ ᵕ ᵔ˶)</h3>
        <div class="card m-5 p-5 bg-primary-subtle">     
