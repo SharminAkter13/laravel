@@ -1,6 +1,3 @@
-@include('layouts.header')
-@include('layouts.nav')
-
 <div class="card m-5">
     <div class="card-header">
         Featured
@@ -91,4 +88,3 @@
         </div>
     </div>
 </div>
-@include('layouts.footer')
