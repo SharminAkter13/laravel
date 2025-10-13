@@ -50,4 +50,4 @@ Route::delete('/delete', [UserController::class, 'destroy'])->name('delete');
 
 
 
-Route::get('/post', [OneToManyController::class, 'index']);
+Route::get('/one-to-many', [OneToManyController::class, 'index']);
