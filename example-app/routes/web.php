@@ -47,3 +47,7 @@ Route::get('/userEdit/{user_id}', [UserController::class, 'update'])->name('user
 Route::post('/editStoreU', [UserController::class, 'editStore'])->name('editStoreU'); // Fixed method name
 
 Route::delete('/delete', [UserController::class, 'destroy'])->name('delete');
+
+
+
+Route::get('/post', [OneToManyController::class, 'index']);
