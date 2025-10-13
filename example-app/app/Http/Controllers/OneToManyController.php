@@ -11,8 +11,7 @@ class OneToManyController extends Controller
 {
     public function index()
     {
-    $comments = Comment::all();
-        // return $comments;
-        return view('post', compact('comments'));
-    }
+  $post = Post::with('comments')->get();
+        //    return  $post;
+         return view('post',compact('post'));    }
 }

@@ -25,7 +25,7 @@
           <a class="nav-link " href="/one-to-one">One-One</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link " href="/one-to-0any">One-Many</a>
+          <a class="nav-link " href="/one-to-many">One-Many</a>
         </li>
       </ul>
       <form class="d-flex" role="search">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\OneToOneController;
+use App\Http\Controllers\OneToManyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
