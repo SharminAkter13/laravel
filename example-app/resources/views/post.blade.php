@@ -15,17 +15,17 @@
                 <th scope="col">Title</th>
                 <th scope="col">Details</th>
 
-                <th scope="col">User Name</th>
+                <th scope="col">Post Name</th>
+                <th scope="col">Post details</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-        @foreach($posts as $comment)
+        @foreach($post as $comment)
             <tr>
                 <td scope="row">{{ $loop->iteration }}</td>
-                <td>{{ $comment->title }}</td>
+                <td>{{ $comment->name }}</td>
                 <td>{{ $comment->details }}</td>
-                <!-- <td>{{ $comment->phone }}</td> -->
 
                 <td>
                     @foreach( $comment->comments as $c)
@@ -42,7 +42,6 @@
 
                 </td>
             
-            </td>
 
                 <td>
                       <div class="btn-group">
