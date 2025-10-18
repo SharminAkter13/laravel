@@ -26,14 +26,14 @@
                 <td>{{ $p->details }}</td>
 
                 <td>
-                    @foreach( $p->brands as $c)
+                    @foreach( $p->products as $c)
                     
                     {{ $c->name }} <br>
                    @endforeach
 
                 </td>
                 <td>
-                    @foreach ($p->brands as $c )
+                    @foreach ($p->products as $c )
 
                     {{ $c->details }} <br>
                    @endforeach
