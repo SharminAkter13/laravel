@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\OneToOneController;
 use App\Http\Controllers\OneToManyController;
+use App\Http\Controllers\ManyToManyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -52,3 +53,4 @@ Route::delete('/delete', [UserController::class, 'destroy'])->name('delete');
 
 
 Route::get('/one-to-many', [OneToManyController::class, 'index']);
+Route::get('/many-to-many', [ManyToManyController::class, 'index']);

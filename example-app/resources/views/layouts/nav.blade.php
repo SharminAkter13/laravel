@@ -27,6 +27,9 @@
          <li class="nav-item">
           <a class="nav-link " href="/one-to-many">One-Many</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link " href="/many-to-many">Many-Many</a>
+        </li>
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
