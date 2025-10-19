@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container m-5 p-8">
-    <h2 class="mb-4">All Products</h2>
+    <h2 class="mb-4">All Owners</h2>
 
    
 
@@ -12,32 +12,21 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col"> product details</th>
-                <th scope="col"> details</th>
+                <th scope="col">Mechanic Name</th>
+                <th scope="col">Owner Name</th>
+                <th scope="col">Car Name</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-        @foreach($products as $p)
+        @foreach($owners as $p)
             <tr>
-                <td scope="row">{{ $loop->iteration }}</td>
+                <th scope="row">{{ $loop->iteration }}</th>
+
                 <td>{{ $p->name }}</td>
+                <td>{{ $p->carOwner?->name ?? 'N/A' }}</td>
+                <td>{{ $p->cars?->name ?? 'N/A' }}</td>
 
-                <td>
-                    @foreach( $p->products as $c)
-                    
-                    {{ $c->name }} <br>
-                   @endforeach
-
-                </td>
-                <td>
-                    @foreach ($p->products as $c )
-
-                    {{ $c->details }} <br>
-                   @endforeach
-
-                </td>
             
 
                 <td>
