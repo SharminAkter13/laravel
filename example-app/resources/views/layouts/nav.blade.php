@@ -22,16 +22,19 @@
           <a class="nav-link " href="/profiles">Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/one-to-one">One-One</a>
+          <a class="nav-link " href="/one-to-one">O-O</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link " href="/one-to-many">One-Many</a>
+          <a class="nav-link " href="/one-to-many">O-M</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/many-to-many">Many-Many</a>
+          <a class="nav-link " href="/many-to-many">M-M</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link " href="/has-one-through">Has-One-Through</a>
+          <a class="nav-link " href="/has-one-through">H-O-T</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link " href="/has-many-through">H-M-T</a>
         </li>
       </ul>
       <form class="d-flex" role="search">

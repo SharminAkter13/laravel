@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HasManyThroughController;
 use App\Http\Controllers\HasOneThroughController;
 use App\Http\Controllers\OneToOneController;
 use App\Http\Controllers\OneToManyController;
@@ -56,3 +57,4 @@ Route::delete('/delete', [UserController::class, 'destroy'])->name('delete');
 Route::get('/one-to-many', [OneToManyController::class, 'index']);
 Route::get('/many-to-many', [ManyToManyController::class, 'index']);
 Route::get('/has-one-through', [HasOneThroughController::class, 'index']);
+Route::get('/has-many-through', [HasManyThroughController::class, 'index']);
