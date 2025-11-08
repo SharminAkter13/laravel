@@ -1,0 +1,1 @@
+Write node server.js in VS code terminal to run the code.

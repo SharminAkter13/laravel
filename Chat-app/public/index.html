@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+<meta charset="UTF-8">
+<title>Messenger Style Chat</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    gap: 20px;
+    background: #ece5dd;
+    padding: 20px;
+}
+
+.chat-box {
+    width: 50%;
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.header {
+    background: #0084ff;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.typing-status {
+    font-size: 12px;
+    color: #fff;
+    opacity: 0.8;
+    margin-left: auto;
+}
+
+.messages {
+    list-style: none;
+    padding: 10px;
+    height: 350px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.msg-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.msg-row.me {
+    flex-direction: row-reverse;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.msg-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+}
+
+.msg-name {
+    font-size: 12px;
+    color: gray;
+    margin-bottom: 2px;
+}
+
+.msg-bubble {
+    padding: 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+
+.msg-time {
+    font-size: 10px;
+    color: gray;
+    margin-top: 2px;
+    align-self: flex-end;
+}
+
+.me .msg-bubble {
+    background: #dcf8c6;
+    border-bottom-right-radius: 0;
+}
+
+.other .msg-bubble {
+    background: #ffffff;
+    border-bottom-left-radius: 0;
+    border: 1px solid #ddd;
+}
+
+form {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+form input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+form button {
+    padding: 8px 12px;
+    border: none;
+    background: #0078ff;
+    color: white;
+    border-radius: 50%;
+    margin-left: 5px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+<div class="chat-box" id="chatA">
+    <div class="header">
+        <img src="https://i.pravatar.cc/150?img=2" alt="Farhana">
+        <span>Farhana</span>
+        <span class="typing-status" id="typingA"></span>
+    </div>
+    <ul class="messages"></ul>
+    <form>
+        <input placeholder="Type message..." autocomplete="off">
+        <button>➤</button>
+    </form>
+</div>
+
+<div class="chat-box" id="chatB">
+    <div class="header">
+        <img src="https://i.pravatar.cc/150?img=1" alt="Sobita">
+        <span>Sobita</span>
+        <span class="typing-status" id="typingB"></span>
+    </div>
+    <ul class="messages"></ul>
+    <form>
+        <input placeholder="Type message..." autocomplete="off">
+        <button>➤</button>
+    </form>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const socket = io();
+
+const avatarA = "https://i.pravatar.cc/150?img=1";
+const avatarB = "https://i.pravatar.cc/150?img=2";
+const nameA = "Sobita";
+const nameB = "Farhana";
+
+const chatA = document.querySelector('#chatA');
+const messagesA = chatA.querySelector('.messages');
+const formA = chatA.querySelector('form');
+const inputA = formA.querySelector('input');
+const typingA = document.querySelector('#typingA');
+
+const chatB = document.querySelector('#chatB');
+const messagesB = chatB.querySelector('.messages');
+const formB = chatB.querySelector('form');
+const inputB = formB.querySelector('input');
+const typingB = document.querySelector('#typingB');
+
+// Send message
+formA.addEventListener('submit', e => {
+    e.preventDefault();
+    if (inputA.value) {
+        socket.emit('chat message', { user: 'A', msg: inputA.value });
+        inputA.value = '';
+        socket.emit('typing', { user: 'A', typing: false });
+    }
+});
+
+formB.addEventListener('submit', e => {
+    e.preventDefault();
+    if (inputB.value) {
+        socket.emit('chat message', { user: 'B', msg: inputB.value });
+        inputB.value = '';
+        socket.emit('typing', { user: 'B', typing: false });
+    }
+});
+
+// Typing event
+inputA.addEventListener('input', () => {
+    socket.emit('typing', { user: 'A', typing: inputA.value.length > 0 });
+});
+
+inputB.addEventListener('input', () => {
+    socket.emit('typing', { user: 'B', typing: inputB.value.length > 0 });
+});
+
+// Receive typing status
+socket.on('typing', data => {
+    if (data.user === 'A') typingB.textContent = data.typing ? 'Sobita টাইপ করছে...' : '';
+    if (data.user === 'B') typingA.textContent = data.typing ? 'Farhana টাইপ করছে...' : '';
+});
+
+// Receive messages
+socket.on('chat message', data => {
+    addMessage(messagesA, data, 'A', avatarA, avatarB, nameA, nameB);
+    addMessage(messagesB, data, 'B', avatarB, avatarA, nameB, nameA);
+});
+
+function addMessage(container, data, currentUser, myAvatar, otherAvatar, myName, otherName) {
+    const msgRow = document.createElement('li');
+    msgRow.classList.add('msg-row');
+    if (data.user === currentUser) msgRow.classList.add('me');
+    else msgRow.classList.add('other');
+
+    const avatar = document.createElement('img');
+    avatar.classList.add('avatar');
+    avatar.src = (data.user === currentUser) ? '' : otherAvatar;
+    if (data.user === currentUser) avatar.style.display = 'none';
+
+    const content = document.createElement('div');
+    content.classList.add('msg-content');
+
+    const msgName = document.createElement('div');
+    msgName.classList.add('msg-name');
+    msgName.textContent = (data.user === currentUser) ? '' : otherName;
+
+    const msgBubble = document.createElement('div');
+    msgBubble.classList.add('msg-bubble');
+    msgBubble.textContent = data.msg;
+
+    const msgTime = document.createElement('div');
+    msgTime.classList.add('msg-time');
+    const now = new Date();
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    msgTime.textContent = `${hours}:${minutes} ${ampm}`;
+
+    content.appendChild(msgName);
+    content.appendChild(msgBubble);
+    content.appendChild(msgTime);
+
+    msgRow.appendChild(avatar);
+    msgRow.appendChild(content);
+
+    container.appendChild(msgRow);
+    container.scrollTop = container.scrollHeight;
+}
+</script>
+</body>
+</html>
